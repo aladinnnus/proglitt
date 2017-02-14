@@ -1,0 +1,15 @@
+Here we are loading data that express the volume of liter from the nil each year
+
+```{r}
+tab <- read.csv("data/Nile.csv")
+```
+
+We reprenseted the volume 
+```{r}
+ggplot(data=tab, aes(x=time ,y=Nile)) + geom_point() + ylim(0,NA) +geom_smooth() +xlab("Time(year)")+ylab("Nile")
+```
+
+
+```{r}
+ggplot(data=tab)+geom_histogram(aes(x=Nile))
+```
