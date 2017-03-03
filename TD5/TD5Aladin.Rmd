@@ -1,0 +1,22 @@
+On peut deja voir que les donnees sont incompletes il y a beaucoup de valeur non renseigne par des XXXX
+mon fichier dpt2015 est dans le meme repertoire que ce fichier
+```{r}
+df<- read_tsv(file ="./dpt2015.txt",
+              locale = locale(encoding = "iso-8859-1"));
+```
+
+
+La on peut faire une premiere analyse ou l'on voit une multiplication des naissances a partir de l'année 1975 mais ce n'est pas tres significatif parce que l'on proportion dans la population
+```{r}
+df  %>% filter(preusuel=="MAXIME", annais!="XXXX") %>% mutate(nombre= as.integer(nombre),annais=as.integer(annais)) %>% group_by(preusuel,annais) %>%summarise(N=sum(nombre)) -> maximedf;
+
+
+
+ggplot(data=maximedf,aes(x=annais,y=N))+geom_point()+xlab("anneeDeNaissance")+ylab("nombre")
+
+
+```
+
+
+
+
