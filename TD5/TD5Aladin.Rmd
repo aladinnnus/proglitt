@@ -8,8 +8,8 @@ df<- read_tsv(file ="./dpt2015.txt",
 
 La on peut faire une premiere analyse ou l'on voit une multiplication des naissances a partir de l'année 1975 mais ce n'est pas tres significatif parce que l'on proportion dans la population
 ```{r}
-df  %>% filter(preusuel=="MAXIME", annais!="XXXX") %>% mutate(nombre= as.integer(nombre),annais=as.integer(annais)) %>% group_by(preusuel,annais) %>%summarise(N=sum(nombre)) -> maximedf;
-
+df  %>% filter(preusuel=="MAXIME", annais!="XXXX") %>% 
+  mutate(nombre= as.integer(nombre),annais=as.integer(annais)) %>% group_by(preusuel,annais) %>%summarise(N=sum(nombre)) -> maximedf;
 
 
 ggplot(data=maximedf,aes(x=annais,y=N))+geom_point()+xlab("anneeDeNaissance")+ylab("nombre")
@@ -17,6 +17,12 @@ ggplot(data=maximedf,aes(x=annais,y=N))+geom_point()+xlab("anneeDeNaissance")+yl
 
 ```
 
+```{r}
+df %>% select(-preusuel,-sexe,-dpt) %>% filter(annais!="XXXX") %>% mutate(nombre= as.integer(nombre),annais=as.integer(annais)) %>%  group_by(annais) %>% summarise(N=sum(nombre)) -> anneedf;
 
+
+
+
+```
 
 
