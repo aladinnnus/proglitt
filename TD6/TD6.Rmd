@@ -1,0 +1,39 @@
+```{r}
+dice <- function(faces=6, n=100)
+{
+  sample(x=seq(from=1, to = faces, by = 1), size=n, replace=TRUE)
+}
+```
+
+
+```{r}
+experiment<- function (faces =6, n=100)
+{
+  dice1<-dice(faces, n);
+  dice2<-dice(faces, n);
+  dice3<-dice(faces, n);
+  
+  data.frame(Dice1=dice1,
+             Dice2=dice2,
+             Dice3=dice3)
+}
+
+
+dedf <- experiment(6,10000000)
+
+
+dedf %>% mutate(Sum = Dice1+Dice2+Dice3) ->dedf2
+```
+
+group by utilise geom_point
+```{r}
+dedf2 %>% group_by(Sum) %>% summarise(N=n()) %>% mutate(P=N/10000000) -> df
+```
+
+
+
+
+```{r}
+ggplot(data=df,aes(x=Sum, y=N))+geom_point()
+```
+
