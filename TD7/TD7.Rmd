@@ -37,3 +37,8 @@ dedf2 %>% group_by(Sum) %>% summarise(N=n()) %>% mutate(P=N/10000000) -> df
 ggplot(data=df,aes(x=Sum, y=N))+geom_point()
 ```
 
+
+
+
+
+
