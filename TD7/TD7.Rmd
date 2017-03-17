@@ -25,6 +25,7 @@ dedf <- experiment(6,10000000)
 dedf %>% mutate(Sum = Dice1+Dice2+Dice3) ->dedf2
 ```
 
+
 group by utilise geom_point
 ```{r}
 dedf2 %>% group_by(Sum) %>% summarise(N=n()) %>% mutate(P=N/10000000) -> df
@@ -40,5 +41,20 @@ ggplot(data=df,aes(x=Sum, y=N))+geom_point()
 
 
 
+```{r}
+library(ggplot2)
+faces = 6
+n = 1E6
+
+experiment(faces, n) %>%
+  mutate(Sum = Dice1 + Dice2 + Dice3) %>%
+  ggplot(aes(x=as.factor(Sum))) + geom_bar(aes(y = (..count..)/sum(..count..)), width = .3) + xlab("Valeur de la somme") + ylab("Fr??quence") + ylim(0,NA) + theme_bw()
+```
 
 
+
+```{r}
+df %>% mutate(variance=P*(1-P)) %>% mutate(erreur=qnorm(0.975)*sqrt(variance/sqrt(sum(N))))-> df2
+
+ggplot()
+```
